@@ -1,0 +1,269 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* palabra clave (keyword) */
+h1 {
+  color: hsl(220, 100%, 25%);
+  border-bottom: 4px solid currentColor; /* usa el mismo color del texto */
+}
+
+h2 { color: hsl(340, 100%, 30%); }
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(80, 80, 80);
+}
+
+li { color: hsl(337, 55%, 48%); }
+
+th { color: hsl(339, 83%, 5%); }
+
+td { color: hsl(325, 100%, 25%); }
+
+a {
+  color: hsl(220, 100%, 25%);
+  border-bottom: 2px solid currentColor;
+  text-decoration: none;
+}
+
+a:hover { color: #00990a; }
+
+/* Sugerencia opcional para que la imagen de la card no se deforme */
+.object-fit-cover { object-fit: cover; }
+
+/* ====== Botón flotante WhatsApp ======
+   Adaptado a paleta pastel (azules y rosados suaves) */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;     /* Distancia desde abajo */
+  right: 20px;      /* Distancia desde la derecha */
+  background-color: #A8BDC2; /* tono gris azulado pastel */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;  /* Tamaño del ícono */
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+  z-index: 1055;    /* Más alto que navbar/carrusel */
+  text-decoration: none;
+  transition: transform .3s ease, background-color .3s ease, opacity .3s ease;
+
+  /* Oculto por defecto hasta hacer scroll */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+/* Estado visible al hacer scroll */
+.whatsapp-float.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Hover/focus: efecto de ampliación con colores de tu paleta */
+.whatsapp-float:hover,
+.whatsapp-float:focus {
+  background-color: #C79EAD; /* rosa lavanda pastel */
+  color: #fff;
+  transform: scale(1.08);
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Icono dentro del botón */
+.whatsapp-float i {
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover i {
+  transform: rotate(15deg);
+}
+
+/* Evitamos que el botón tape el footer en pantallas pequeñas */
+@media (max-width: 575.98px) {
+  footer { padding-bottom: 84px; } /* 60px botón + 24px aire */
+}
+
+/* Accesibilidad: menos movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float { transition: none; }
+}
+/* ====== Carrito flotante ====== */
+.cart-float {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #264653; /* tono azul grisáceo */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+  text-decoration: none;
+  z-index: 1055;
+  transition: transform .2s ease, background-color .2s ease;
+}
+
+.cart-float:hover {
+  background-color: #2a9d8f;
+  transform: scale(1.1);
+}
+
+/* Contador del carrito */
+.cart-count {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background-color: #e76f51;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 3px 7px;
+}
+
+/* ===== Modal del carrito ===== */
+.cart-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.cart-content {
+  background-color: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.cart-content h2 {
+  margin-top: 0;
+  color: #264653;
+}
+
+.cart-content button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#checkoutBtn {
+  background-color: #2a9d8f;
+  color: #fff;
+}
+
+#closeCart {
+  background-color: #e76f51;
+  color: #fff;
+  margin-left: 10px;
+}
+/* ====== Carrito flotante ====== */
+.cart-float {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #c88b9c; /* rosa palo */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+  text-decoration: none;
+  z-index: 1055;
+  transition: transform .2s ease, background-color .2s ease;
+}
+
+.cart-float:hover {
+  background-color: #b26e83;
+  transform: scale(1.1);
+}
+
+/* Contador del carrito */
+.cart-count {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background-color: #f4a261;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 3px 7px;
+}
+
+/* ===== Modal del carrito ===== */
+.cart-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.cart-content {
+  background-color: #fff8f9;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.cart-content h2 {
+  margin-top: 0;
+  color: #9c3d57;
+  text-align: center;
+}
+
+.cart-content button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#checkoutBtn {
+  background-color: #b26e83;
+  color: #fff;
+}
+
+#closeCart {
+  background-color: #e5989b;
+  color: #fff;
+  margin-left: 10px;
+}
