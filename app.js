@@ -188,3 +188,61 @@ document.addEventListener("DOMContentLoaded", () => {
     cartModal.style.display = "none";
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("contenedor-api");
+
+  // 1️⃣ Llamar a la API RESTful
+  fetch("https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline")
+    .then(response => response.json())
+    .then(data => {
+      mostrarProductos(data);
+    })
+    .catch(error => {
+      console.error("Error al consumir la API:", error);
+      contenedor.innerHTML = `<p class="text-danger text-center">Error al cargar los productos. Intenta nuevamente más tarde.</p>`;
+    });
+
+  // 2️⃣ Función para crear tarjetas dinámicas
+  function mostrarProductos(productos) {
+    const productosFiltrados = productos.slice(0, 12); // Mostramos solo 12 para no saturar
+
+    productosFiltrados.forEach(prod => {
+      const card = document.createElement("div");
+      card.classList.add("col-md-3", "mb-4");
+
+      card.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <img src="${prod.image_link}" class="card-img-top" alt="${prod.name}">
+          <div class="card-body">
+            <h5 class="card-title">${prod.name}</h5>
+            <p class="card-text text-muted mb-1">${prod.brand}</p>
+            <p class="card-text"><strong>Precio:</strong> $${prod.price || "No disponible"}</p>
+            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalProducto${prod.id}">
+              Ver más
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal con detalles del producto -->
+        <div class="modal fade" id="modalProducto${prod.id}" tabindex="-1" aria-labelledby="modalLabel${prod.id}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel${prod.id}">${prod.name}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <img src="${prod.image_link}" class="img-fluid mb-3" alt="${prod.name}">
+                <p><strong>Marca:</strong> ${prod.brand}</p>
+                <p><strong>Precio:</strong> $${prod.price || "No disponible"}</p>
+                <p><strong>Descripción:</strong> ${prod.description || "Sin descripción disponible."}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      contenedor.appendChild(card);
+    });
+  }
+});
